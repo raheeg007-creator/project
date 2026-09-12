@@ -2,10 +2,6 @@
 
 /**
  * Class Database
- * 
- * Provides a single, shared PDO connection to the MySQL database
- * using the Singleton design pattern. All Models should call
- * Database::getConnection() instead of creating their own connections.
  */
 class Database
 {
