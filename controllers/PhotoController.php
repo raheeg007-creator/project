@@ -71,12 +71,22 @@ class PhotoController extends Controller
             return;
         }
 
+        // Enforce a 5MB max size on the server side. This is the
+        // authoritative check - the JavaScript check on the client
+        // only improves user experience and can be bypassed.
+        $maxSizeBytes = 5 * 1024 * 1024;
+        if ($_FILES['photo']['size'] > $maxSizeBytes) {
+            $this->view('photos.create', ['error' => 'حجم الصورة يجب ألا يتجاوز 5 ميجابايت.']);
+            return;
+        }
+
         $allowedTypes = ['image/jpeg', 'image/png', 'image/gif'];
         $fileType = mime_content_type($_FILES['photo']['tmp_name']);
 
         if (!in_array($fileType, $allowedTypes)) {
             $this->view('photos.create', ['error' => 'الملف يجب أن يكون صورة (jpg, png, gif).']);
             return;
+        
         }
 
         // Generate a unique file name to prevent overwriting existing files
