@@ -52,20 +52,36 @@ class Router
         $requestPath = '/' . trim($requestPath, '/');
 
         foreach ($this->routes as $route) {
+            // Skip routes registered for a different HTTP method
+            // (e.g. a GET route should never match a POST request)
             if ($route['method'] !== $requestMethod) {
                 continue;
             }
 
-            // Convert {param} placeholders into a capturing regex group
+            // --- Convert the route's {param} placeholders into real regex ---
+            // Example: '/photo/{id}' becomes '/photo/([^/]+)'
+            // Each {name} placeholder turns into a capturing group that
+            // matches any sequence of characters except a slash.
             $pattern = preg_replace('/\{([a-zA-Z]+)\}/', '([^/]+)', $route['path']);
+
+            // Wrap the pattern with start (^) and end ($) anchors so it only
+            // matches the ENTIRE path, not just part of it. Without anchors,
+            // '/photo' would incorrectly match '/photo/25' too.
             $pattern = '#^' . rtrim($pattern, '/') . '$#';
 
+            // Special case: the root path '/' becomes an empty pattern after
+            // rtrim(), so we restore it explicitly here.
             if ($pattern === '#^$#') {
-                $pattern = '#^/$#'; // special case for the root path
+                $pattern = '#^/$#';
             }
 
+            // Try to match the current request path against this route's pattern
             if (preg_match($pattern, $requestPath, $matches)) {
-                array_shift($matches); // remove the full match, keep only captured params
+                // $matches[0] is always the full matched string, which we
+                // don't need - only the captured groups (the actual param
+                // values, e.g. the "25" in "/photo/25") matter here.
+                array_shift($matches);
+
                 $this->execute($route, $matches);
                 return;
             }
