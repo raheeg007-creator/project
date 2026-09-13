@@ -18,6 +18,11 @@ $currentUserId = $_SESSION['user_id'] ?? 0;
     <meta charset="UTF-8">
     <title><?= htmlspecialchars($photo['title']) ?> - Alzikrayat</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.2/css/bootstrap.rtl.min.css" rel="stylesheet">
+    <style>
+        @media (max-width: 576px) {
+            .card-img-top { max-height: 300px; object-fit: cover; }
+        }
+    </style>
 </head>
 <body class="bg-light">
 

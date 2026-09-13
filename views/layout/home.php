@@ -15,9 +15,24 @@
             border: none;
             border-radius: 12px;
         }
+
+        /* Tablet adjustments */
+        @media (max-width: 768px) {
+            .hero { padding: 60px 20px; }
+            .hero h1 { font-size: 2.1rem; }
+        }
+
+        /* Mobile phone adjustments */
         @media (max-width: 576px) {
             .hero { padding: 50px 15px; }
             .hero h1 { font-size: 1.8rem; }
+            .hero p.lead { font-size: 1rem; }
+            .stat-card h2 { font-size: 1.5rem; }
+        }
+
+        /* Landscape orientation on small devices */
+        @media (max-width: 768px) and (orientation: landscape) {
+            .hero { padding: 30px 15px; }
         }
     </style>
 </head>

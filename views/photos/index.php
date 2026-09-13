@@ -8,6 +8,23 @@
     <style>
         .photo-card img { height: 220px; object-fit: cover; width: 100%; }
         .list-style img { height: 150px; }
+
+        /* Tablet adjustments */
+        @media (max-width: 768px) {
+            .photo-card img { height: 180px; }
+        }
+
+        /* Mobile phone adjustments */
+        @media (max-width: 576px) {
+            .photo-card img { height: 160px; }
+            .btn-group-sm .btn { font-size: 0.75rem; padding: 0.25rem 0.5rem; }
+            .navbar .btn-sm { font-size: 0.75rem; }
+        }
+
+        /* Landscape orientation on small devices */
+        @media (max-width: 768px) and (orientation: landscape) {
+            .photo-card img { height: 140px; }
+        }
     </style>
 </head>
 <body class="bg-light">
