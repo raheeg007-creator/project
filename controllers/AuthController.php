@@ -68,8 +68,16 @@ class AuthController extends Controller
             return;
         }
 
-        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+       if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
             $this->view('auth.register', ['error' => 'صيغة البريد الإلكتروني غير صحيحة.']);
+            return;
+        }
+
+        // Enforce the same length limit as the database column (VARCHAR(100))
+        // so we reject invalid input with a clear message instead of letting
+        // MySQL fail later with a less helpful error.
+        if (strlen($email) > 100) {
+            $this->view('auth.register', ['error' => 'البريد الإلكتروني طويل جداً (100 حرف كحد أقصى).']);
             return;
         }
 
