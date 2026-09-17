@@ -62,7 +62,5 @@ project/
 Raw PHP (PDO for the database layer), MySQL, Bootstrap, and plain JavaScript for client-side validation.
 
 ---
-Individual project — Raheeg | Advanced Web Technologies | Sudan University of Science and Technology
-
 Raheeg abd alazeim mohamad 
 Information Tecnologey
