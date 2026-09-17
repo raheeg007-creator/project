@@ -30,7 +30,20 @@ On top of that sits a hand-written Router that matches incoming URLs like /photo
 - Protection against SQL injection (parameterized queries) and XSS (output escaped with htmlspecialchars)
 
 ## Project structure
+'''
 project/
+├── config/          # Database connection
+├── core/            # Base Router, Model, Controller
+├── controllers/     # Auth, Photo, Comment
+├── models/          # User, Photo, Comment
+├── views/           # Pages
+├── routes/          # Route registration
+└── public/          # Entry point + uploaded images
+
+
+
+
+'''
  
 
 
@@ -51,3 +64,5 @@ Raw PHP (PDO for the database layer), MySQL, Bootstrap, and plain JavaScript for
 ---
 Individual project — Raheeg | Advanced Web Technologies | Sudan University of Science and Technology
 
+Raheeg abd alazeim mohamad 
+Information Tecnologey
