@@ -1,8 +1,11 @@
+
+
+Repositry:https://github.com/raheeg007-creator/project
+
 # project Alzikrayat 
 
-A photo-sharing web application built for the Advanced Web Technologies course (7th semester) at Sudan University of Science and Technology, College of Computer Science and Information Technology.
 
-Users can register, log in, upload photos with a title and description, browse a shared gallery, and comment on each other's photos.
+A photo-sharing web application in this application users can register, log in, upload photos with a title and description, browse a shared gallery, and comment on each other's photos.
 
 ## Why no framework?
 
@@ -54,7 +57,7 @@ project/
 1. Place the project folder inside XAMPP's htdocs
 2. Start Apache and MySQL from the XAMPP control panel
 3. Create a database named alzikrayat in phpMyAdmin
-4. Run the three table creation scripts (users, photos, comments) — full schema is in the architecture report
+4. Import database.sql into phpMyAdmin to create all tables automatically
 5. Open http://localhost/project/public/
 
 ## Stack
