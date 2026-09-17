@@ -1,7 +1,5 @@
 <?php
-
-/**
- * routes/web.php
+/** 
  * ملف تسجيل جميع مسارات التطبيق (Route Definitions).
  */
 

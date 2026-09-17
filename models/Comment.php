@@ -2,17 +2,10 @@
 
 require_once __DIR__ . '/../core/Model.php';
 
-/**
- * Class Comment
- *
- * Represents the Comments table and handles database operations
- * related to adding and retrieving comments on photos.
- */
+
 class Comment extends Model
 {
-    /**
-     * Inserts a new comment linked to a specific photo and user.
-     *
+    /**     
      * @param int    $photoId The photo being commented on.
      * @param int    $userId  The author of the comment.
      * @param string $text    The comment content.
@@ -34,8 +27,7 @@ class Comment extends Model
     }
 
     /**
-     * Returns all comments for a given photo, oldest first, joined
-     * with the commenter's name for display.
+     
      *
      * @param int $photoId The photo id.
      * @return array List of comment records.

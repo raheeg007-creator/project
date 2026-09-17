@@ -1,23 +1,17 @@
 <?php
 
-/**
- * Class Database
- */
 class Database
 {
-    // Database configuration - adjust these to match your local setup
+    // Database configuration - adjust these to  your local setup
     private static $host = 'localhost';
     private static $dbName = 'alzikrayat';
     private static $username = 'root';
     private static $password = '';
 
-    // Holds the single shared PDO instance
     private static $connection = null;
 
     /**
-     * Returns the shared PDO database connection.
-     * Creates it on first call, then reuses it on every subsequent call.
-     *
+     
      * @return PDO The active database connection.
      * @throws PDOException if the connection fails.
      */

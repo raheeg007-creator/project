@@ -2,18 +2,10 @@
 
 require_once __DIR__ . '/../core/Model.php';
 
-/**
- * Class User
- *
- * Represents the Users table and handles all database operations
- * related to registering and retrieving user accounts.
- */
+
 class User extends Model
 {
     /**
-     * Inserts a new user record into the database with a securely
-     * hashed password.
-     *
      * @param string $firstName User's first name.
      * @param string $lastName  User's last name.
      * @param string $email     User's unique email address.
@@ -40,7 +32,6 @@ class User extends Model
     }
 
     /**
-     * Finds a single user by their email address.
      *
      * @param string $email The email address to search for.
      * @return array|false
@@ -54,8 +45,6 @@ class User extends Model
     }
 
     /**
-     * Finds a single user by their primary key id.
-     *
      * @param int $id The user's id.
      * @return array|false
      */

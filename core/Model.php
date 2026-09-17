@@ -2,13 +2,7 @@
 
 require_once __DIR__ . '/../config/database.php';
 
-/**
- * Class Model
- *
- * Abstract base class for all data models (User, Photo, Comment).
- * Provides shared access to the database connection so that child
- * models don't need to manage their own connection logic.
- */
+
 abstract class Model
 {
     /**

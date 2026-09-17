@@ -2,16 +2,10 @@
 
 require_once __DIR__ . '/../core/Model.php';
 
-/**
- * Class Photo
- *
- * Represents the Photos table and handles all database operations
- * related to uploading, retrieving, and deleting photos.
- */
+
 class Photo extends Model
 {
     /**
-     * Inserts a new photo record into the database.
      *
      * @param int    $userId      Owner of the photo.
      * @param string $fileName    Physical file name on disk.
@@ -36,9 +30,7 @@ class Photo extends Model
     }
 
     /**
-     * Returns all photos, most recent first, joined with the
-     * uploader's first and last name for gallery display.
-     *
+     
      * @return array List of photo records.
      */
     public function getAll(): array
@@ -53,8 +45,6 @@ class Photo extends Model
     }
 
     /**
-     * Finds a single photo by its id, including the uploader's name.
-     *
      * @param int $id The photo id.
      * @return array|false
      */
@@ -72,9 +62,6 @@ class Photo extends Model
     }
 
     /**
-     * Deletes a photo record, but only if it belongs to the given user.
-     * Prevents users from deleting photos they don't own.
-     *
      * @param int $photoId The photo to delete.
      * @param int $userId  The currently logged-in user's id.
      * @return bool True if a row was deleted, false otherwise.
