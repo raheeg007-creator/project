@@ -3,31 +3,16 @@
 require_once __DIR__ . '/../core/Controller.php';
 require_once __DIR__ . '/../models/User.php';
 
-/**
- * Class AuthController
- *
- * Handles user registration, login, logout, session state,
- * and the "last login" cookie behavior.
- */
+
 class AuthController extends Controller
 {
-    /**
-     * Renders the home/landing page. Shows the LoginRegister view
-     * if the user is not logged in.
-     *
-     * @return void
-     */
+    
     public function index(): void
     {
         $this->view('layout.home');
     }
 
-    /**
-     * Displays the login form, including the "last login from this
-     * computer" cookie message if one exists.
-     *
-     * @return void
-     */
+    
     public function showLogin(): void
     {
         $lastLogin = $_COOKIE['last_login'] ?? null;
@@ -38,22 +23,12 @@ class AuthController extends Controller
         ]);
     }
 
-    /**
-     * Displays the registration form.
-     *
-     * @return void
-     */
+    
     public function showRegister(): void
     {
         $this->view('auth.register', ['error' => null]);
     }
 
-    /**
-     * Processes registration form submission: validates input,
-     * checks for a duplicate email, and creates the new user.
-     *
-     * @return void
-     */
     public function register(): void
     {
         $firstName = trim($_POST['first_name'] ?? '');
@@ -64,25 +39,23 @@ class AuthController extends Controller
         // Server-side validation
         if (!preg_match('/^[A-Za-z]{1,50}$/', $firstName) ||
             !preg_match('/^[A-Za-z]{1,50}$/', $lastName)) {
-            $this->view('auth.register', ['error' => 'الاسم يجب أن يحتوي على حروف فقط.']);
+            $this->view('auth.register', ['error' => 'The name should contain only letters.']);
             return;
         }
 
        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-            $this->view('auth.register', ['error' => 'صيغة البريد الإلكتروني غير صحيحة.']);
+            $this->view('auth.register', ['error' => 'The email format is invalid.']);
             return;
         }
 
-        // Enforce the same length limit as the database column (VARCHAR(100))
-        // so we reject invalid input with a clear message instead of letting
-        // MySQL fail later with a less helpful error.
+        
         if (strlen($email) > 100) {
-            $this->view('auth.register', ['error' => 'البريد الإلكتروني طويل جداً (100 حرف كحد أقصى).']);
+            $this->view('auth.register', ['error' => 'The email is too long (maximum 100 characters).']);
             return;
         }
 
         if (strlen($password) < 6) {
-            $this->view('auth.register', ['error' => 'كلمة المرور يجب أن تكون 6 أحرف على الأقل.']);
+            $this->view('auth.register', ['error' => 'The password must be at least 6 characters long.']);
             return;
         }
 
@@ -90,7 +63,7 @@ class AuthController extends Controller
 
         // Check for duplicate email before inserting
         if ($userModel->findByEmail($email)) {
-            $this->view('auth.register', ['error' => 'هذا البريد الإلكتروني مسجل بالفعل.']);
+            $this->view('auth.register', ['error' => 'This email is already registered.']);
             return;
         }
 
@@ -99,12 +72,7 @@ class AuthController extends Controller
         $this->redirect('/login');
     }
 
-    /**
-     * Processes login form submission: verifies credentials, starts
-     * the session, and sets the 7-day "last login" cookie.
-     *
-     * @return void
-     */
+    
     public function login(): void
     {
         $email    = trim($_POST['email'] ?? '');
@@ -116,7 +84,7 @@ class AuthController extends Controller
         // Verify the user exists AND the password matches the stored hash
         if (!$user || !password_verify($password, $user['password'])) {
             $this->view('auth.login', [
-                'error'     => 'البريد الإلكتروني أو كلمة المرور غير صحيحة.',
+                'error'     => 'The email or password is incorrect.',
                 'lastLogin' => $_COOKIE['last_login'] ?? null,
             ]);
             return;
@@ -132,13 +100,7 @@ class AuthController extends Controller
         $this->redirect('/photos');
     }
 
-    /**
-     * Logs the current user out by destroying the session.
-     * Note: this does NOT clear the last_login cookie, since that
-     * cookie must persist independently of session state.
-     *
-     * @return void
-     */
+    
     public function logout(): void
     {
         $_SESSION = [];
