@@ -2,19 +2,18 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <title>تسجيل الدخول - Alzikrayat</title>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.2/css/bootstrap.rtl.min.css" rel="stylesheet">
-</head>
+    <title>Login - Alzikrayat</title>
+<link href="/project/public/css/bootstrap.rtl.min.css" rel="stylesheet"></head>
 <body class="bg-light">
 
 <div class="container" style="max-width: 420px; margin-top: 80px;">
     <div class="card shadow-sm">
         <div class="card-body p-4">
-            <h3 class="text-center mb-4">تسجيل الدخول</h3>
+            <h3 class="text-center mb-4">Login</h3>
 
             <?php if (!empty($lastLogin)): ?>
                 <div class="alert alert-info small">
-                    آخر دخول من هذا الجهاز كان في: <?= htmlspecialchars($lastLogin) ?>
+                          Last login on this device: <?= htmlspecialchars($lastLogin) ?>
                 </div>
             <?php endif; ?>
 
@@ -26,20 +25,20 @@
 
             <form method="POST" action="/project/public/login" novalidate>
                 <div class="mb-3">
-                    <label class="form-label">البريد الإلكتروني</label>
+                    <label class="form-label">Email </label>
                     <input type="email" name="email" class="form-control" required>
                 </div>
 
                 <div class="mb-3">
-                    <label class="form-label">كلمة المرور</label>
+                    <label class="form-label"> password</label>
                     <input type="password" name="password" class="form-control" required minlength="6">
                 </div>
 
-                <button type="submit" class="btn btn-primary w-100">دخول</button>
+                <button type="submit" class="btn btn-primary w-100">Login</button>
             </form>
 
             <p class="text-center mt-3 small">
-                ليس لديك حساب؟ <a href="/project/public/register">سجّلي الآن</a>
+                  Don't have an account? <a href="/project/public/register"> Register now</a>
             </p>
         </div>
     </div>

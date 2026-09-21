@@ -17,8 +17,7 @@ $currentUserId = $_SESSION['user_id'] ?? 0;
 <head>
     <meta charset="UTF-8">
     <title><?= htmlspecialchars($photo['title']) ?> - Alzikrayat</title>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.2/css/bootstrap.rtl.min.css" rel="stylesheet">
-    <style>
+<link href="/project/public/css/bootstrap.rtl.min.css" rel="stylesheet">    <style>
         @media (max-width: 576px) {
             .card-img-top { max-height: 300px; object-fit: cover; }
         }
@@ -28,8 +27,8 @@ $currentUserId = $_SESSION['user_id'] ?? 0;
 
 <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm mb-4">
     <div class="container">
-        <a class="navbar-brand fw-bold" href="/project/public/">📸 Alzikrayat</a>
-        <a href="/project/public/photos" class="btn btn-outline-secondary btn-sm">رجوع للمعرض</a>
+        <a class="navbar-brand fw-bold" href="/project/public/"> Alzikrayat</a>
+        <a href="/project/public/photos" class="btn btn-outline-secondary btn-sm">Return to Gallery</a>
     </div>
 </nav>
 
@@ -39,7 +38,7 @@ $currentUserId = $_SESSION['user_id'] ?? 0;
         <div class="card-body">
             <h4><?= htmlspecialchars($photo['title']) ?></h4>
             <p class="text-muted small">
-                بواسطة <?= htmlspecialchars($photo['first_name'] . ' ' . $photo['last_name']) ?>
+                By <?= htmlspecialchars($photo['first_name'] . ' ' . $photo['last_name']) ?>
                 — <?= htmlspecialchars($photo['date_time']) ?>
             </p>
             <p><?= nl2br(htmlspecialchars($photo['description'])) ?></p>
@@ -47,8 +46,8 @@ $currentUserId = $_SESSION['user_id'] ?? 0;
             <?php if ((int) $photo['user_id'] === (int) $_SESSION['user_id']): ?>
                 <a href="/project/public/photo/<?= (int) $photo['id'] ?>/delete"
                    class="btn btn-outline-danger btn-sm"
-                   onclick="return confirm('هل أنتِ متأكدة من حذف هذه الصورة؟');">
-                    حذف الصورة
+                   onclick="return confirm('Are you sure you want to delete this image?');">
+                    Delete Image
                 </a>
             <?php endif; ?>
         </div>
@@ -57,18 +56,18 @@ $currentUserId = $_SESSION['user_id'] ?? 0;
     <!-- ===== التعليقات ===== -->
     <div class="card shadow-sm">
         <div class="card-body">
-            <h5 class="mb-3">التعليقات</h5>
+            <h5 class="mb-3">Comments</h5>
 
             <form method="POST" action="/project/public/photo/<?= (int) $photo['id'] ?>/comment" class="mb-4">
                 <div class="input-group">
-                    <input type="text" name="comment" class="form-control" placeholder="اكتبي تعليقاً..." required maxlength="500">
-                    <button class="btn btn-primary" type="submit">إرسال</button>
+                    <input type="text" name="comment" class="form-control" placeholder="Write a comment..." required maxlength="500">
+                    <button class="btn btn-primary" type="submit">Send</button>
                 </div>
             </form>
 
             <div id="comments-list">
                 <?php if (empty($comments)): ?>
-                    <p class="text-muted small">لا توجد تعليقات بعد. كوني أول من يعلّق!</p>
+                    <p class="text-muted small">No comments yet. Be the first to comment!</p>
                 <?php else: ?>
                     <?php foreach ($comments as $c): ?>
                         <div class="border-bottom py-2">

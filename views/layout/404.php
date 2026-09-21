@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>404 - الصفحة غير موجودة | Alzikrayat</title>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.2/css/bootstrap.rtl.min.css" rel="stylesheet">
+    <title>404 - Page Not Found | Alzikrayat</title>
+    <link href="/project/public/css/bootstrap.rtl.min.css" rel="stylesheet">
     <style>
         body {
             min-height: 100vh;
@@ -27,11 +27,11 @@
 
 <div class="container text-center">
     <div class="error-code">404</div>
-    <h3 class="mb-3">الصفحة غير موجودة</h3>
+    <h3 class="mb-3">Page Not Found</h3>
     <p class="text-muted mb-4">
-        الرابط اللي بتحاولي توصلي له مش موجود، أو ممكن يكون اتحذف.
+        The link you are trying to access is not available, or it may have been deleted.
     </p>
-    <a href="/project/public/" class="btn btn-primary">الرجوع للصفحة الرئيسية</a>
+    <a href="/project/public/" class="btn btn-primary">Return to Home Page</a>
 </div>
 
 </body>
