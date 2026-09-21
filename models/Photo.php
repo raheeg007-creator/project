@@ -2,17 +2,10 @@
 
 require_once __DIR__ . '/../core/Model.php';
 
-
+// موديل الصور للتعامل مع عمليات رفع، استرجاع، وحذف الصور من قاعدة البيانات
 class Photo extends Model
 {
-    /**
-     *
-     * @param int    $userId      Owner of the photo.
-     * @param string $fileName    Physical file name on disk.
-     * @param string $title       Short title of the photo.
-     * @param string $description Optional caption/story.
-     * @return int The id of the newly created photo.
-     */
+    // حفظ بيانات الصورة الجديدة وربطها بالمستخدم الذي رفعها
     public function create(int $userId, string $fileName, string $title, string $description): int
     {
         $sql = "INSERT INTO photos (user_id, file_name, title, description)
@@ -26,13 +19,11 @@ class Photo extends Model
             ':description' => $description,
         ]);
 
+        // إرجاع الـ ID الخاص بالصورة بعد حفظها
         return (int) $this->db->lastInsertId();
     }
 
-    /**
-     
-     * @return array List of photo records.
-     */
+    // جلب جميع الصور مع اسم صاحب كل صورة وعرضها من الأحدث للأقدم
     public function getAll(): array
     {
         $sql = "SELECT photos.*, users.first_name, users.last_name
@@ -44,10 +35,7 @@ class Photo extends Model
         return $stmt->fetchAll();
     }
 
-    /**
-     * @param int $id The photo id.
-     * @return array|false
-     */
+    // استرجاع تفاصيل صورة محددة مع بيانات صاحبها لعرضها في صفحة الصورة المنفردة
     public function findById(int $id)
     {
         $sql = "SELECT photos.*, users.first_name, users.last_name
@@ -61,11 +49,7 @@ class Photo extends Model
         return $stmt->fetch();
     }
 
-    /**
-     * @param int $photoId The photo to delete.
-     * @param int $userId  The currently logged-in user's id.
-     * @return bool True if a row was deleted, false otherwise.
-     */
+    // حذف الصورة بشرط أن يكون المستخدم الحالي هو صاحبها فقط (لحماية خصوصية الصور)
     public function deleteIfOwner(int $photoId, int $userId): bool
     {
         $sql = "DELETE FROM photos WHERE id = :id AND user_id = :userId";
@@ -76,7 +60,7 @@ class Photo extends Model
             ':userId' => $userId,
         ]);
 
-        // rowCount() > 0 means a row actually matched and got deleted
+        // rowCount > 0 يعني إنه لقى السطر وحذفه فعلاً
         return $stmt->rowCount() > 0;
     }
 }

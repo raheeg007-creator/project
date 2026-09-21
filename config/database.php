@@ -1,40 +1,65 @@
 <?php
 
+/**
+ * تطبيق نمط التصميم Singleton لكلاس قاعدة البيانات.
+ * الهدف: ضمان وجود نسخة واحدة فقط من الاتصال (Single Instance) طوال دورة حياة الطلب لتوفير موارد السيرفر.
+ */
 class Database
 {
-    // Database configuration - adjust these to  your local setup
-    private static $host = 'localhost';
-    private static $dbName = 'alzikrayat';
-    private static $username = 'root';
-    private static $password = '';
+    // متغير ستاتيك للاحتفاظ بالنسخة الوحيدة من الكلاس
+    private static ?Database $instance = null;
 
-    private static $connection = null;
+    // كائن اتصال PDO
+    private PDO $connection;
 
-    /**
-     
-     * @return PDO The active database connection.
-     * @throws PDOException if the connection fails.
-     */
-    public static function getConnection()
+    // إعدادات الاتصال بقاعدة البيانات
+    private string $host = 'localhost';
+    private string $dbName = 'alzikrayat';
+    private string $username = 'root';
+    private string $password = '';
+
+    // جعل الـ Constructor خاص (private) لمنع إنشاء أي كائن جديد عبر new Database() من الخارج
+    private function __construct()
     {
-        if (self::$connection === null) {
-            try {
-                $dsn = "mysql:host=" . self::$host . ";dbname=" . self::$dbName . ";charset=utf8mb4";
+        try {
+            $dsn = "mysql:host=" . $this->host . ";dbname=" . $this->dbName . ";charset=utf8mb4";
 
-                self::$connection = new PDO($dsn, self::$username, self::$password, [
-                    // Throw exceptions on errors instead of failing silently
-                    PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-                    // Return results as associative arrays by default
-                    PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
-                    // Use real prepared statements (safer against SQL injection)
-                    PDO::ATTR_EMULATE_PREPARES => false,
-                ]);
-            } catch (PDOException $e) {
-                // In production you'd log this instead of exposing details
-                die("Database connection failed: " . $e->getMessage());
-            }
+            $this->connection = new PDO($dsn, $this->username, $this->password, [
+                // رمي استثناءات عند حدوث أي خطأ بدلاً من التجاهل الصامت
+                PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+                // إرجاع نتائج الاستعلامات كمصفوفة ترابطية بشكل افتراضي
+                PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+                // استخدام Prepared Statements حقيقية من MySQL للحماية من الـ SQL Injection
+                PDO::ATTR_EMULATE_PREPARES => false,
+            ]);
+        } catch (PDOException $e) {
+            // إيقاف التنفيذ وعرض رسالة الخطأ عند تعذر الاتصال
+            die("Database connection failed: " . $e->getMessage());
+        }
+    }
+
+    // الدالة المركزية لنمط Singleton: تُرجع النسخة الوحيدة للكلاس أو تنشئها إن لم تكن موجودة
+    public static function getInstance(): self
+    {
+        if (self::$instance === null) {
+            self::$instance = new self();
         }
 
-        return self::$connection;
+        return self::$instance;
+    }
+
+    // إرجاع كائن اتصال الـ PDO من النسخة الحالية
+    public function getConnection(): PDO
+    {
+        return $this->connection;
+    }
+
+    // منع استنساخ الكائن باستخدام clone
+    private function __clone() {}
+
+    // منع استعادة الكائن عبر unserialize لضمان بقاء النسخة وحيدة دائماً
+    public function __wakeup()
+    {
+        throw new \Exception("Cannot unserialize a singleton.");
     }
 }

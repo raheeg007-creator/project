@@ -1,4 +1,11 @@
+# تفعيل محرك إعادة توجيه الروابط
 RewriteEngine On
+
+# التأكد أن الرابط المطلوب ليس ملفاً حقيقياً على السيرفر (مثل ملفات css أو الصور)
 RewriteCond %{REQUEST_FILENAME} !-f
+
+# والتأكد أيضاً أنه ليس مجلداً حقيقياً
 RewriteCond %{REQUEST_FILENAME} !-d
+
+# توجيه جميع الطلبات الأخرى إلى index.php ليعمل كـ Front Controller
 RewriteRule ^(.*)$ index.php [QSA,L]

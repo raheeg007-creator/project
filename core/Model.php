@@ -2,21 +2,15 @@
 
 require_once __DIR__ . '/../config/database.php';
 
-
+// الكلاس الأساسي لجميع الموديلز (يرث منه User, Photo, Comment)
 abstract class Model
 {
-    /**
-     * @var PDO Holds the shared database connection instance.
-     */
+    // كائن الـ PDO المتاح لجميع الكلاسات الفرعية
     protected PDO $db;
 
-    /**
-     * Constructor.
-     * Automatically fetches the shared PDO connection from the
-     * Database class whenever any child model is instantiated.
-     */
     public function __construct()
     {
-        $this->db = Database::getConnection();
+        // جلب الاتصال من كلاس قاعدة البيانات بنمط Singleton
+        $this->db = Database::getInstance()->getConnection();
     }
 }

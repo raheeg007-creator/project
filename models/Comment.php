@@ -5,12 +5,7 @@ require_once __DIR__ . '/../core/Model.php';
 
 class Comment extends Model
 {
-    /**     
-     * @param int    $photoId The photo being commented on.
-     * @param int    $userId  The author of the comment.
-     * @param string $text    The comment content.
-     * @return int The id of the newly created comment.
-     */
+    
     public function create(int $photoId, int $userId, string $text): int
     {
         $sql = "INSERT INTO comments (photo_id, user_id, comment)
@@ -26,12 +21,7 @@ class Comment extends Model
         return (int) $this->db->lastInsertId();
     }
 
-    /**
-     
-     *
-     * @param int $photoId The photo id.
-     * @return array List of comment records.
-     */
+    
     public function getByPhotoId(int $photoId): array
     {
         $sql = "SELECT comments.*, users.first_name, users.last_name

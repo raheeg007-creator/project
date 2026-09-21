@@ -29,20 +29,24 @@
 </head>
 <body class="bg-light">
 
-<nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm mb-4">
-    <div class="container">
-        <a class="navbar-brand fw-bold" href="/project/public/"> Alzikrayat</a>
-        <div class="d-flex align-items-center">
-            <span class="text-muted me-3">Hi <?= htmlspecialchars($_SESSION['first_name']) ?></span>
-            <a href="/project/public/photos/create" class="btn btn-primary btn-sm me-2"> Upload photo</a>
-            <a href="/project/public/logout" class="btn btn-outline-danger btn-sm">Log out </a>
+<nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm mb-4" dir="ltr">
+    <div class="container d-flex align-items-center justify-content-between">
+        <a class="navbar-brand fw-bold mb-0" href="/project/public/">Alzikrayat</a>
+        <div class="d-flex align-items-center gap-2">
+            <span class="text-muted" style="margin-right: 0.5rem;">Hi <?= htmlspecialchars($_SESSION['first_name']) ?></span>
+            <a href="/project/public/photos/create" class="btn btn-primary btn-sm">Upload photo</a>
+            <a href="/project/public/logout" class="btn btn-outline-danger btn-sm">Log out</a>
         </div>
     </div>
 </nav>
 
 <div class="container">
 
-    <div class="d-flex justify-content-end mb-3">
+    <!-- شريط أدوات المعرض: البحث السريع + أزرار تغيير نمط العرض -->
+    <div class="d-flex justify-content-between align-items-center flex-wrap gap-2 mb-3" dir="ltr">
+        <div style="max-width: 250px;">
+            <input type="text" id="gallerySearch" class="form-control form-control-sm" placeholder="🔍 Search by title or author..." onkeyup="filterGallery()">
+        </div>
         <div class="btn-group btn-group-sm">
             <button class="btn btn-outline-secondary" onclick="setGrid(3)">3 columns</button>
             <button class="btn btn-outline-secondary" onclick="setGrid(4)">4 columns</button>
@@ -73,6 +77,7 @@
 </div>
 
 <script>
+    // تغيير نمط العرض (3 أعمدة، 4 أعمدة، قائمة كاملة)
     function setGrid(mode) {
         const items = document.querySelectorAll('.gallery-item');
         items.forEach(item => {
@@ -80,7 +85,17 @@
                 (mode === 'list' ? 'col-12 list-style' : (mode === 4 ? 'col-md-3' : 'col-md-4'));
         });
     }
+
+    // فلترة وبحث سريع وتفاعلي في المعرض بدون إعادة تحميل الصفحة
+    function filterGallery() {
+        const query = document.getElementById('gallerySearch').value.toLowerCase();
+        const items = document.querySelectorAll('.gallery-item');
+        items.forEach(item => {
+            const cardText = item.innerText.toLowerCase();
+            item.style.display = cardText.includes(query) ? '' : 'none';
+        });
+    }
 </script>
 
 </body>
-</html
+</html>

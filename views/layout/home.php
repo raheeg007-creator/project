@@ -38,32 +38,29 @@
 </head>
 <body>
 
-<!-- ===== Navbar ديناميكي ===== -->
-<nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
-    <div class="container">
-        <a class="navbar-brand fw-bold" href="/project/public/"> Alzikrayat</a>
+<!-- ===== Navbar ديناميكي (مرتب من اليسار لليمين) ===== -->
+<nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm" dir="ltr">
+    <div class="container d-flex align-items-center justify-content-between">
+        <div class="d-flex align-items-center gap-3">
+            <!-- الشعار في أقصى اليسار أولاً -->
+            <a class="navbar-brand fw-bold mb-0" style="margin-right: 1rem; margin-left: 0;" href="/project/public/">Alzikrayat</a>
 
-        <div class="collapse navbar-collapse justify-content-between">
-            <ul class="navbar-nav">
+            <!-- روابط التنقل بجانب الشعار في جهة اليسار -->
+            <ul class="navbar-nav d-flex flex-row gap-3 mb-0" style="padding-left: 0;">
                 <li class="nav-item"><a class="nav-link" href="/project/public/">Home</a></li>
                 <li class="nav-item"><a class="nav-link" href="/project/public/photos">Gallery</a></li>
-                <li class="nav-item"><a class="nav-link" href="#about">About Us </a></li>
+                <li class="nav-item"><a class="nav-link" href="#about">About Us</a></li>
             </ul>
+        </div>
 
-            <ul class="navbar-nav">
-                <?php if (isset($_SESSION['user_id'])): ?>
-                    <li class="nav-item d-flex align-items-center me-2">
-                        <span class="text-muted">Hi <?= htmlspecialchars($_SESSION['first_name']) ?></span>
-                    </li>
-                    <li class="nav-item">
-                        <a class="btn btn-outline-danger btn-sm" href="/project/public/logout">Log out </a>
-                    </li>
-                <?php else: ?>
-                    <li class="nav-item">
-                        <a class="btn btn-primary btn-sm" href="/project/public/login">Please Login</a>
-                    </li>
-                <?php endif; ?>
-            </ul>
+        <!-- أزرار تسجيل الدخول / الخروج وبيانات المستخدم في جهة اليمين -->
+        <div class="d-flex align-items-center gap-2">
+            <?php if (isset($_SESSION['user_id'])): ?>
+                <span class="text-muted" style="margin-right: 0.5rem;">Hi <?= htmlspecialchars($_SESSION['first_name']) ?></span>
+                <a class="btn btn-outline-danger btn-sm" href="/project/public/logout">Log out</a>
+            <?php else: ?>
+                <a class="btn btn-primary btn-sm" href="/project/public/login">Please Login</a>
+            <?php endif; ?>
         </div>
     </div>
 </nav>

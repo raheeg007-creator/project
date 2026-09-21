@@ -2,19 +2,10 @@
 
 class Router
 {
-    /**
-     * @var array Holds all registered routes.
-     */
+    
     private array $routes = [];
 
-    /**
-     * Registers a new route.
-     *
-     * @param string $method     HTTP method (GET, POST, etc.).
-     * @param string $path       Route pattern, e.g. '/photo/{id}'.
-     * @param array  $controller [ControllerClassName, actionMethodName].
-     * @return void
-     */
+    
     public function add(string $method, string $path, array $controller): void
     {
         $this->routes[] = [

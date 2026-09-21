@@ -25,16 +25,29 @@ $currentUserId = $_SESSION['user_id'] ?? 0;
 </head>
 <body class="bg-light">
 
-<nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm mb-4">
-    <div class="container">
-        <a class="navbar-brand fw-bold" href="/project/public/"> Alzikrayat</a>
+<nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm mb-4" dir="ltr">
+    <div class="container d-flex align-items-center justify-content-between">
+        <a class="navbar-brand fw-bold mb-0" href="/project/public/">Alzikrayat</a>
         <a href="/project/public/photos" class="btn btn-outline-secondary btn-sm">Return to Gallery</a>
     </div>
 </nav>
 
 <div class="container" style="max-width: 700px;">
     <div class="card shadow-sm mb-4">
-        <img src="/project/public/images/uploads/<?= htmlspecialchars($photo['file_name']) ?>" class="card-img-top">
+        <img id="mainPhoto" src="/project/public/images/uploads/<?= htmlspecialchars($photo['file_name']) ?>" class="card-img-top" style="transition: filter 0.3s ease;">
+        
+        <!-- ميزة إضافية للتميز (Novelty Feature): خوارزميات فلاتر تفاعلية للصور -->
+        <div class="p-3 border-bottom bg-light d-flex align-items-center justify-content-between flex-wrap gap-2">
+            <span class="small text-muted fw-bold"> Image Filters:</span>
+            <div class="btn-group btn-group-sm" role="group">
+                <button type="button" class="btn btn-outline-secondary active" onclick="applyFilter('none', this)">Normal</button>
+                <button type="button" class="btn btn-outline-secondary" onclick="applyFilter('grayscale(100%)', this)">B&W</button>
+                <button type="button" class="btn btn-outline-secondary" onclick="applyFilter('sepia(85%)', this)">Sepia</button>
+                <button type="button" class="btn btn-outline-secondary" onclick="applyFilter('contrast(130%) saturate(140%)', this)">Vivid</button>
+                <button type="button" class="btn btn-outline-secondary" onclick="applyFilter('sepia(40%) hue-rotate(315deg) contrast(110%)', this)">Vintage</button>
+            </div>
+        </div>
+
         <div class="card-body">
             <h4><?= htmlspecialchars($photo['title']) ?></h4>
             <p class="text-muted small">
@@ -81,6 +94,32 @@ $currentUserId = $_SESSION['user_id'] ?? 0;
         </div>
     </div>
 </div>
+
+<script>
+    // 1. طبقة التحقق عبر JavaScript للتعليقات (Layer 2 Client-side Validation)
+    const commentForm = document.querySelector('form');
+    if (commentForm) {
+        commentForm.addEventListener('submit', function (e) {
+            const input = this.querySelector('input[name="comment"]');
+            if (!input || input.value.trim() === '') {
+                e.preventDefault();
+                alert('Please enter a non-empty comment.');
+                if (input) input.focus();
+            }
+        });
+    }
+
+    // 2. تطبيق خوارزميات فلاتر الصور التفاعلية (Novelty Task: Custom Image Filters)
+    function applyFilter(filterCss, btn) {
+        const img = document.getElementById('mainPhoto');
+        if (img) {
+            img.style.filter = filterCss;
+        }
+        const buttons = btn.parentElement.querySelectorAll('button');
+        buttons.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+    }
+</script>
 
 </body>
 </html>

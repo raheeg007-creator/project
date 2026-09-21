@@ -25,11 +25,14 @@ On top of that sits a hand-written Router that matches incoming URLs like /photo
 
 - Registration and login with hashed passwords (Bcrypt)
 - A cookie that remembers the last login time from the same browser (persists for 7 days)
+- Database connection managed via the Singleton design pattern
 - Photo upload with title and description
 - Gallery with switchable display styles (3-column, 4-column, list)
-- Photo deletion — restricted to the owner only
-- Comments on photos
-- Three validation layers: HTML5, JavaScript, and server-side
+- Live instant gallery search by title or author name (Novelty Task)
+- Interactive client-side image filters (B&W, Sepia, Vivid, Vintage) (Novelty Task)
+- Photo deletion — restricted to the owner only (with disk file removal)
+- Comments on photos with instant display
+- Three validation layers on all forms: HTML5, custom JavaScript, and server-side
 - Protection against SQL injection (parameterized queries) and XSS (output escaped with htmlspecialchars)
 
 ## Project structure
