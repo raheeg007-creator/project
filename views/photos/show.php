@@ -37,8 +37,8 @@ $currentUserId = $_SESSION['user_id'] ?? 0;
         <img id="mainPhoto" src="/project/public/images/uploads/<?= htmlspecialchars($photo['file_name']) ?>" class="card-img-top" style="transition: filter 0.3s ease;">
         
         <!-- ميزة إضافية للتميز (Novelty Feature): خوارزميات فلاتر تفاعلية للصور -->
-        <div class="p-3 border-bottom bg-light d-flex align-items-center justify-content-between flex-wrap gap-2">
-            <span class="small text-muted fw-bold"> Image Filters:</span>
+        <div class="p-3 border-bottom bg-light d-flex align-items-center gap-2" dir="ltr">
+            <span class="small text-muted fw-bold" style="margin-right: 0.5rem;">Image Filters:</span>
             <div class="btn-group btn-group-sm" role="group">
                 <button type="button" class="btn btn-outline-secondary active" onclick="applyFilter('none', this)">Normal</button>
                 <button type="button" class="btn btn-outline-secondary" onclick="applyFilter('grayscale(100%)', this)">B&W</button>

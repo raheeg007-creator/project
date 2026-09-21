@@ -45,7 +45,9 @@
     <!-- شريط أدوات المعرض: البحث السريع + أزرار تغيير نمط العرض -->
     <div class="d-flex justify-content-between align-items-center flex-wrap gap-2 mb-3" dir="ltr">
         <div style="max-width: 250px;">
-            <input type="text" id="gallerySearch" class="form-control form-control-sm" placeholder="🔍 Search by title or author..." onkeyup="filterGallery()">
+
+                    <!-- ميزة إضافية للتميز (Novelty Feature): خوارزميات  بحث للصور -->
+            <input type="text" id="gallerySearch" class="form-control form-control-sm" placeholder="🔍 Search by title  ..." onkeyup="filterGallery()">
         </div>
         <div class="btn-group btn-group-sm">
             <button class="btn btn-outline-secondary" onclick="setGrid(3)">3 columns</button>
