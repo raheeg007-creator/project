@@ -28,5 +28,9 @@ Alzikrayat is a photo-sharing web application that allows registered users to up
 
 ## Student Name
 
-Raheeg | Information Technology | Sudan University of Science and Technology
+Raheeg 
+
+ Information Technology 
+ 
+  Sudan University of Science and Technology
 
