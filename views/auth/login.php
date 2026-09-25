@@ -21,7 +21,7 @@
                 </div>
             <?php endif; ?>
 
-            <!-- إظهار رسالة الخطأ لو بيانات الدخول مش صحيحة -->
+            <!-- إظهار رسالة الخطأ لو بيانات الدخول غير صحيحة -->
             <?php if (!empty($error)): ?>
                 <div class="alert alert-danger small">
                     <?= htmlspecialchars($error) ?>
@@ -43,7 +43,7 @@
                 <button type="submit" class="btn btn-primary w-100">Login</button>
             </form>
 
-            <!-- رابط لصفحة إنشاء حساب جديد لو المستخدم معندوش حساب -->
+            <!-- رابط لصفحة إنشاء حساب جديد لو المستخدم ليس لديه حساب -->
             <p class="text-center mt-3 small">
                   Don't have an account? <a href="/project/public/register"> Register now</a>
             </p>

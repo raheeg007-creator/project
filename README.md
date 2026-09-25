@@ -2,72 +2,31 @@
 
 Repositry:https://github.com/raheeg007-creator/project
 
-# project Alzikrayat 
+# Project Name
 
+Alzikrayat
 
-A photo-sharing web application in this application users can register, log in, upload photos with a title and description, browse a shared gallery, and comment on each other's photos.
+## Description
 
-## Why no framework?
+Alzikrayat is a photo-sharing web application that allows registered users to upload photos, browse a shared gallery, and comment on each other's uploads. The entire backend is built from scratch in raw PHP — no framework (Laravel, Symfony) and no ORM — as required by the course specification. The goal was to understand how routing, database access, sessions, and authentication actually work under the hood.
 
-The entire backend is built from scratch in raw PHP — no Laravel, no Symfony, no ORM. That was a hard requirement of the project, and the point was to actually understand how routing, database connections, and sessions work under the hood before relying on a framework to do it for me.
+## Technologies
 
-## Architecture
+- **Backend:** Raw PHP (PDO for database access)
+- **Database:** MySQL
+- **Frontend:** HTML5, Bootstrap 5 (RTL build), vanilla JavaScript
+- **Environment:** XAMPP (Apache + MySQL)
+- **Version Control:** Git & GitHub
 
-Built with MVC on top of a 3-tier structure:
+## How to Run
 
-- Views — HTML pages styled with Bootstrap
-- Controllers — handle incoming requests and decide what happens
-- Models — talk to the database directly
+1. Place the project folder inside XAMPP's `htdocs` directory
+2. Start **Apache** and **MySQL** from the XAMPP control panel
+3. Open phpMyAdmin and create a database named `alzikrayat`
+4. Import `alzikrayat.sql` into that database to create all tables automatically
+5. Open `http://localhost/project/public/` in your browser
 
-On top of that sits a hand-written Router that matches incoming URLs like /photo/25 using regular expressions, extracts the parameter, and dispatches it to the right controller action.
+## Student Name
 
-## Features
+Raheeg | Information Technology | Sudan University of Science and Technology
 
-- Registration and login with hashed passwords (Bcrypt)
-- A cookie that remembers the last login time from the same browser (persists for 7 days)
-- Database connection managed via the Singleton design pattern
-- Photo upload with title and description
-- Gallery with switchable display styles (3-column, 4-column, list)
-- Live instant gallery search by title or author name (Novelty Task)
-- Interactive client-side image filters (B&W, Sepia, Vivid, Vintage) (Novelty Task)
-- Photo deletion — restricted to the owner only (with disk file removal)
-- Comments on photos with instant display
-- Three validation layers on all forms: HTML5, custom JavaScript, and server-side
-- Protection against SQL injection (parameterized queries) and XSS (output escaped with htmlspecialchars)
-
-## Project structure
-'''
-project/
-├── config/          # Database connection
-├── core/            # Base Router, Model, Controller
-├── controllers/     # Auth, Photo, Comment
-├── models/          # User, Photo, Comment
-├── views/           # Pages
-├── routes/          # Route registration
-└── public/          # Entry point + uploaded images
-
-
-
-
-'''
- 
-
-
-
-
-## Running it locally
-
-1. Place the project folder inside XAMPP's htdocs
-2. Start Apache and MySQL from the XAMPP control panel
-3. Create a database named alzikrayat in phpMyAdmin
-4. Import database.sql into phpMyAdmin to create all tables automatically
-5. Open http://localhost/project/public/
-
-## Stack
-
-Raw PHP (PDO for the database layer), MySQL, Bootstrap, and plain JavaScript for client-side validation.
-
----
-Raheeg abd alazeim mohamad 
-
-Information Tecnologey

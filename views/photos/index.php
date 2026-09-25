@@ -3,12 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gallery - Alzikrayat</title>
+    <title>Gallery  Alzikrayat</title>
     <link href="/project/public/css/bootstrap.rtl.min.css" rel="stylesheet">
     <style>
         .photo-card img { height: 220px; object-fit: cover; width: 100%; }
-        .list-style img { height: 150px; }
+.photo-card img { height: 220px; object-fit: cover; width: 100%; }
 
+/* List view: image beside text, not stacked on top */
+.list-style .card {
+    flex-direction: row-reverse;
+    align-items: stretch;
+}
+.list-style img {
+    height: auto;
+    width: 220px;
+    max-width: 40%;
+    object-fit: cover;
+    border-radius: 0.375rem 0 0 0.375rem;
+}
+.list-style .card-body {
+    flex: 1;
+}
+
+@media (max-width: 576px) {
+    .list-style img { width: 120px; }
+}
         /* Tablet adjustments */
         @media (max-width: 768px) {
             .photo-card img { height: 180px; }

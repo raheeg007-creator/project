@@ -16,7 +16,7 @@ $currentUserId = $_SESSION['user_id'] ?? 0;
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <title><?= htmlspecialchars($photo['title']) ?> - Alzikrayat</title>
+    <title><?= htmlspecialchars($photo['title']) ?>  Alzikrayat</title>
 <link href="/project/public/css/bootstrap.rtl.min.css" rel="stylesheet">    <style>
         @media (max-width: 576px) {
             .card-img-top { max-height: 300px; object-fit: cover; }
